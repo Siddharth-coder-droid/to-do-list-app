@@ -1,25 +1,52 @@
-<h1> To do list </h1>
+<!DOCTYPE html>
+<!-- svelte-ignore a11y-missing-attribute -->
+<h1>HTML MINIFY</h1>
+<!-- svelte-ignore a11y-missing-attribute -->
+<html>
+    <head>
+     <!--<link rel="stylesheet" type="text/css" href="style.css">-->
+</head>
+<body>
+    <!-- svelte-ignore a11y-missing-content -->
+    <a href="C:\Users\Admin\myapp\src\routes\app.js"></a>
+    <div id="formatter-container">
+        <textarea class="large-area--input" placeholder="Enter HTML code here"></textarea>
+        <br>
+        <!--<button class="controls__button--format">Format HTML</button>-->
+        <button class="controls__button--minify">Minify HTML</button>
+        <br>
+        <textarea class="large-area--output"></textarea>
 
-<h2>IEEE</h2>
+    </div>
+    <script src="formatter.js"></script>
 
-<style>
-    h1 {color:red;}
-    h2 {color: blue;}
-  </style>
+    <script>
+        const inputArea = document.querySelector(".large-area--input");
+    const outputArea = document.querySelector(".large-area--output");
+    //const btnFormat = document.querySelector(".controls__button--format");
+    const btnMinify = document.querySelector(".controls__button--minify");
+    
+    /*btnFormat.addEventListener("click", () => {
+         const formattedHTML = formatHTML(inputArea.value);
+         outputArea.value = formattedHTML;
+         });*/
+    
+         btnMinify.addEventListener("click", () => {
+            const minifiedHTML = minifyHTML(inputArea.value);
+            outputArea.value = minifiedHTML;
+        });
+    
+        /*function formatHTML(htmlString) {
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(htmlString, "text/html");
+            const formattedHTML = new XMLSerializer().serializeToString(xmlDoc);
+            return formattedHTML;
+            }*/
+    
+            function minifyHTML(htmlString) {
+            return htmlString.replace(/>\s+</g, '><').trim();
+        }
+    </script>
 
-<script>
-    let todos = [];
-    function addTodo() {
-        todos = [...todos,''];
-    }
-    function removeSelf(indeX) {
-        todos = [...todos.slice(0, indeX), ...todos.slice(index+1)];
-    }
-</script>
-{#each todos as todo, index}
-<input bind:value={todos[index]}>
-<button on:click={()=>removeSelf(index)}>X</button>
-<br />
-
-{/each}
-<button on:click={addTodo}>Add</button>
+</body>
+</html>
